@@ -42,3 +42,20 @@ INSERT INTO customer(custid,firstname,lastname,gender,city) VALUES(1006,'Sushma'
 
 -- SELECT STATEMENTS
 SELECT * FROM customer;
+
+SELECT * FROM customer WHERE age<40 or city='CHennai';
+
+
+-- UPDATE STATEMENT
+
+UPDATE customer SET custid=1007 WHERE custid=1006 AND firstname='Raghul';
+
+SET sql_safe_updates=0;
+
+UPDATE customer SET city='Mumbai' WHERE custid=1002;
+UPDATE customer SET age=31,city='Hyderabad' WHERE custid=1004;
+
+UPDATE CUSTOMER SET city='Delhi' WHERE custid IN (1001,1002,1003,1004,1005);
+
+-- DELETE STATEMENT
+DELETE FROM customer WHERE custid=1006;
