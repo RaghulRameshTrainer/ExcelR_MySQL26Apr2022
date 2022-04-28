@@ -81,3 +81,13 @@ INSERT INTO unique_notnull_tbl VALUES(101,'Ankit Kumar','Kolkatta');
 INSERT INTO unique_notnull_tbl(ID,custname) VALUES(102,'Apurba Majumdar');
 INSERT INTO unique_notnull_tbl(ID,city) VALUES(102,'Mumbai');
 INSERT INTO unique_notnull_tbl(ID,custname,city) VALUES(102,'Apurba Majumdar','Mumbai');
+
+
+SELECT * FROM unique_tbl;
+INSERT INTO unique_tbl VALUES(null,'Mahesh Babu','Hyderabad');
+SELECT coalesce(custid,'Not Available') , custname, city FROM unique_tbl;
+
+describe unique_tbl;
+
+ALTER TABLE unique_tbl
+MODIFY COLUMN city varchar(20) NOT NULL;
