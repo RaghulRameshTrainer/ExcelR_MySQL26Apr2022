@@ -99,3 +99,32 @@ INSERT INTO orders VALUES(10000,1000,'HeadPhone',2000);
 SELECT * FROM orders;
 INSERT INTO orders VALUES(10001,1005,'Mobile',115000);
 INSERT INTO orders VALUES(10001,1001,'Mobile',115000);
+
+
+-- ........... GROUP BY , HAVING.. ORDER BY .......
+CREATE TABLE employee(
+id INT PRIMARY KEY,
+name VARCHAR(100) NOT NULL,
+gender CHAR(1) ,
+salary INT);
+
+INSERT INTO employee(id, name, gender,salary) 
+VALUES 
+    (1, 'AXEL', 'M',30000),
+    (2, 'Annie', 'F',40000),
+    (3, 'Ace', 'M',50000),
+    (4, 'Zelda', 'F',60000),
+    (5, 'Diesel', 'M',20000),
+    (6, 'Tilly', 'F',15000),
+    (7, 'Leroy', 'M',20000),
+    (8, 'Olivia', 'F',25000);
+    
+SELECT * FROM employee;
+
+SELECT SUM(salary) FROM employee;
+
+SELECT gender, SUM(SALARY) as total_sal,MIN(SALARY) as min_salary , max(salary) as max_salary 
+FROM employee
+GROUP BY gender
+HAVING total_sal > 125000
+ORDER BY total_sal desc;
