@@ -50,3 +50,52 @@ INSERT INTO check_const_tbl2 VALUES(1000,'Pankaj Sharma','Pune',27);
 SELECT * FROM check_const_tbl2;
 INSERT INTO check_const_tbl2 VALUES(1001,'Arun Kumar','Cochin',30);
 
+
+-- PRIMARY KEY
+
+CREATE TABLE pk_table(
+empid INT PRIMARY KEY,
+empname VARCHAR(100) NOT NULL,
+age INT CHECK (age>20),
+country VARCHAR(100) CHECK ( country IN ('India','England','USA'))
+);
+
+INSERT INTO pk_table VALUES(1000,'Durga Devi',27,'India');
+SELECT * FROM pk_table;
+INSERT INTO pk_table VALUES(1000,'Prabhakaran',30,'England');
+INSERT INTO pk_table(empname, age, country) VALUES('Prabhakaran',30,'England');
+INSERT INTO pk_table(empid,empname, age, country) VALUES(1001,'Prabhakaran',30,'England');
+
+
+SELECT * FROM pk_table WHERE empid=1000;
+
+CREATE TABLE pk_table2(
+ID INT ,
+empname VARCHAR(100) NOT NULL,
+age INT CHECK (age>20),
+country VARCHAR(100) CHECK ( country IN ('India','England','USA')),
+CONSTRAINT pk_key PRIMARY KEY (ID,country)
+);
+
+INSERT INTO pk_table2 VALUES(1000,'Durga Devi',27,'India');
+INSERT INTO pk_table2 VALUES(1001,'Durga Devi',27,'India');
+
+INSERT INTO pk_table2 VALUES(1000,'Madhan Kumar',37,'USA');
+
+SELECT * FROM pk_table2;
+
+
+SELECT * FROM pk_table;
+
+CREATE TABLE orders(
+order_id INT PRIMARY KEY,
+custid INT NOT NULL,
+prod_name VARCHAR(100),
+amount INT,
+FOREIGN KEY (custid) REFERENCES pk_table(empid)
+);
+
+INSERT INTO orders VALUES(10000,1000,'HeadPhone',2000);
+SELECT * FROM orders;
+INSERT INTO orders VALUES(10001,1005,'Mobile',115000);
+INSERT INTO orders VALUES(10001,1001,'Mobile',115000);
