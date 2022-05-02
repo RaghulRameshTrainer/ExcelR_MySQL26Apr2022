@@ -74,5 +74,26 @@ VALUES(100,'Mobile','Electronics'),
 SELECT * FROM PRODUCT;
 
 SELECT c.custid,custname,city,product_name,amount
-FROM CUSTOMER c INNER JOIN ORDER_TABLE o ON c.custid=o.custid
-INNER JOIN PRODUCT p ON o.prodid=p.prodid; 
+FROM CUSTOMER c  JOIN ORDER_TABLE o ON c.custid=o.custid
+ JOIN PRODUCT p ON o.prodid=p.prodid; 
+
+CREATE TABLE sample_tbl(
+custid INT,
+custname VARCHAR(100),
+register_date timestamp,
+updated_date date,
+maint_date 	time
+);
+
+INSERT INTO sample_tbl VALUES(1000,'Rohit Sharma',current_timestamp(),current_date(),current_time());
+INSERT INTO sample_tbl VALUES(1001,'Virat Kholi','2000-01-01 10:10:30','2020-12-01','23:59:59');
+
+SELECT custname, DATE(register_date) FROM sample_tbl;
+SELECT * FROM sample_tbl;
+
+SELECT * FROM CUSTOMER LEFT OUTER JOIN ORDER_TBL ON CUSTOMER.custid = ORDER_TBL.custid;
+SELECT * FROM CUSTOMER LEFT JOIN ORDER_TBL ON CUSTOMER.custid = ORDER_TBL.custid;
+
+
+SELECT c.custid,c.custname,c.city,o.custid,o.product_name, o.amount FROM CUSTOMER c RIGHT JOIN ORDER_TBL o ON c.custid = o.custid;
+SELECT c.custid,c.custname,c.city,o.custid,o.product_name, o.amount FROM  ORDER_TBL o LEFT JOIN CUSTOMER c ON c.custid = o.custid;
