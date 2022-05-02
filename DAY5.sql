@@ -36,3 +36,43 @@ SELECT * FROM CUSTOMER INNER JOIN ORDER_TBL ON CUSTOMER.custid=ORDER_TBL.custid;
 
 SELECT customer.custid,custname,city,product_name,amount 
 FROM CUSTOMER INNER JOIN ORDER_TBL ON CUSTOMER.custid=ORDER_TBL.custid;
+
+CREATE TABLE ORDER_TABLE(
+orderid INT PRIMARY KEY,
+custid INT,
+prodid VARCHAR(100) NOT NULL,
+amount DECIMAL(12,2)
+);
+
+
+INSERT INTO ORDER_TABLE
+VALUES(1,1000,100,25000),
+(2,1001,101,70000),
+(3,1000,102,1500),
+(4,1001,103,20000),
+(5,1002,104,15000),
+(6,1100,105,3000);
+
+CREATE TABLE PRODUCT(
+prodid INT PRIMARY KEY,
+product_name VARCHAR(100) NOT NULL,
+category VARCHAR(100)
+);
+
+INSERT INTO PRODUCT
+VALUES(100,'Mobile','Electronics'),
+(101,'Laptop','Electronics'),
+(102,'Charger','Electronics'),
+(103,'Tab','Electronics'),
+(104,'Desktop','Electronics'),
+(105,'Powerbank','Electronics'),
+(106,'TV','Electronics'),
+(107,'Fridge','Electric'),
+(108,'WashingMachine','Electric'),
+(109,'MicroOven','Electric');
+
+SELECT * FROM PRODUCT;
+
+SELECT c.custid,custname,city,product_name,amount
+FROM CUSTOMER c INNER JOIN ORDER_TABLE o ON c.custid=o.custid
+INNER JOIN PRODUCT p ON o.prodid=p.prodid; 
