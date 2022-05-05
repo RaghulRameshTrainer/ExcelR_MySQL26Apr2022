@@ -24,7 +24,7 @@ $d day of the month (00...31)
 %H Hours (00..23)
 %h hours(00..12)
 %p AM|PM
-%I Minute
+%i Minute
 %S ->Seconds
 %T -> hh:mm:ss
 
@@ -53,3 +53,25 @@ SELECT orderid,productname,amount,date_format(orderdate,'%d/%m/%Y') FROM order_i
 
 
 SELECT orderid,productname,amount,date_format(orderdate,'%W %D %M %y %T') FROM order_info;
+
+
+CREATE TABLE order_details(
+orderid INT primary key,
+productname VARCHAR(100) NOT NULL,
+amount INT,
+orderdate timestamp
+);
+
+INSERT INTO order_details VALUES(1,'Camera',50000,current_timestamp()),(2,'headphone',2000,'2022-05-05 07:30:15');
+
+SELECT * FROM order_details;
+SELECT orderid,productname,amount,date_format(orderdate,'%h:%i %p %b %d , %Y - %T') FROM order_details;
+SELECT orderid,productname,amount,date(orderdate) FROM order_details WHERE date(orderdate)='2022-05-05';
+
+SELECT orderid,productname,amount,DATE(orderdate) FROM order_details;
+
+SELECT current_time();
+SELECT LAST_DAY('2000-02-01');
+SELECT datediff('2022-05-05', '2022-04-05');
+SELECT DATE_ADD('2022-05-05',INTERVAL 10 DAY);
+SELECT DATE_SUB('2022-05-05',INTERVAL 10 DAY);
