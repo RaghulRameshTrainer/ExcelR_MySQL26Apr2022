@@ -1,0 +1,165 @@
+-- PLSQL BLOCK STRUCTURE:
+==========================
+
+DECLARE
+    -- Need to declare all the variables here before usage
+BEGIN
+    -- logic / operations
+END;
+/
+
+-- OPERATORS
+-- + - * / ** 
+-- =  != | <> , >  < >=  <=
+-- LIKE, BETWEEN , IN, NOT IN
+
+DECLARE
+    x INTEGER := 100;
+    y INTEGER := 200;
+    res INTEGER;
+BEGIN
+    res := x + y;
+    DBMS_OUTPUT.PUT_LINE( 'RESULT:' ||res);
+ 
+END;
+/
+
+CREATE TABLE CUSTOMERS(
+ID INT PRIMARY KEY,
+NAME VARCHAR2(100) NOT NULL,
+AGE INT NOT NULL,
+CITY VARCHAR2(30),
+SALARY DECIMAL(30,2)
+);
+
+INSERT INTO CUSTOMERS VALUES(1,'Raghul',37,'Chennai',100000);
+INSERT INTO CUSTOMERS VALUES(2,'Parth',27,'Delhi',75000);
+INSERT INTO CUSTOMERS VALUES(3,'Pankaj',25,'Pune',125000);
+INSERT INTO CUSTOMERS VALUES(4,'Dhoni',39,'Ranchi',200000);
+INSERT INTO CUSTOMERS VALUES(5,'Kholi',34,'Bangalore',150000);
+
+
+SELECT * FROM CUSTOMERS ORDER BY ID ASC;
+SELECT * FROM CUSTOMERS WHERE ID=4;
+
+
+DECLARE 
+    c_id CUSTOMERS.ID%type := 4;
+    c_name CUSTOMERS.name%type;
+    c_age CUSTOMERS.age%type;
+    c_city CUSTOMERS.city%type;
+    c_salary DECIMAL(30,2);
+BEGIN
+    SELECT ID,NAME,AGE,CITY,SALARY INTO c_id,c_name,c_age,c_city,c_salary
+    FROM CUSTOMERS
+    WHERE ID = c_id;
+    dbms_output.put_line('Customer Name:' || c_name || ' City:'|| c_city ||' Salary:'||c_salary);
+END;
+/
+
+
+
+DECLARE 
+    c_id CUSTOMERS.ID%type;
+    c_name CUSTOMERS.name%type;
+    c_age CUSTOMERS.age%type;
+    c_city CUSTOMERS.city%type;
+    c_salary DECIMAL(30,2);
+BEGIN
+    SELECT ID,NAME,AGE,CITY,SALARY INTO c_id,c_name,c_age,c_city,c_salary
+    FROM CUSTOMERS
+    WHERE salary = (select max(salary) from customers);
+    IF (c_salary > 10000) THEN
+    DBMS_OUTPUT.PUT_LINE(c_name ||' is highly paid with rs: ' || c_salary);
+    -- dbms_output.put_line(c_name);
+    END IF;
+END;
+/
+
+
+
+
+
+
+
+DECLARE 
+    c_id CUSTOMERS.ID%type := 2;
+    c_name CUSTOMERS.name%type;
+    c_age CUSTOMERS.age%type;
+    c_city CUSTOMERS.city%type;
+    c_salary DECIMAL(30,2);
+BEGIN
+    SELECT ID,NAME,AGE,CITY,SALARY INTO c_id,c_name,c_age,c_city,c_salary
+    FROM CUSTOMERS
+    WHERE ID = c_id;
+    IF (c_salary > 100000) THEN
+    DBMS_OUTPUT.PUT_LINE(c_name ||' is highly paid with rs: ' || c_salary);
+    -- dbms_output.put_line(c_name);
+    ELSE
+    DBMS_OUTPUT.PUT_LINE(c_name ||' is less paid with rs: ' || c_salary || ' hence his salary is getting revised to 100000 now');
+    UPDATE CUSTOMERS SET salary=100000 WHERE id=c_id; 
+    END IF;
+END;
+/
+
+
+
+DECLARE 
+    c_id CUSTOMERS.ID%type := 4;
+    c_name CUSTOMERS.name%type;
+    c_age CUSTOMERS.age%type;
+    c_city CUSTOMERS.city%type;
+    c_salary DECIMAL(30,2);
+BEGIN
+    SELECT ID,NAME,AGE,CITY,SALARY INTO c_id,c_name,c_age,c_city,c_salary
+    FROM CUSTOMERS
+    WHERE ID = c_id;
+    IF (c_age > 38) THEN
+    DBMS_OUTPUT.PUT_LINE(c_name ||' is senior player and must be retired. Age is: ' || c_age );
+    ELSIF (c_age > 32) THEN
+    DBMS_OUTPUT.PUT_LINE(c_name ||' is Well experienced player and must be retired in a couple of years, Age is: ' || c_age);
+    ELSE
+    DBMS_OUTPUT.PUT_LINE(c_name ||' is a junior player , Age is: ' || c_age);
+    END IF;
+END;
+/
+
+-- LOOPS :  LOOP , WHILE , FOR
+
+DECLARE
+    x number := 1;
+BEGIN
+    LOOP
+        dbms_output.put_line(x);
+        x := x + 1;
+        
+        IF x > 100 THEN
+            exit;
+        END IF;
+        
+    END LOOP;
+END;
+/
+
+
+DECLARE 
+    x number := 1;
+BEGIN
+    WHILE (x <= 10) LOOP
+        dbms_output.put_line('Value of x :'||x);
+        x := x + 1;
+    END LOOP;
+END;
+/
+
+
+
+DECLARE
+    x number;
+BEGIN
+    FOR x in 90..100 LOOP
+        dbms_output.put_line(x) ;   
+    END LOOP;
+END;
+/
+
